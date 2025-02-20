@@ -57,9 +57,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     //image lib
     implementation(libs.coil.compose)
-    implementation(libs.coil)
-    implementation(libs.coil.compose)
-
+    implementation(libs.coil.network.ktor3)
     //network libs
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.okhttp)
