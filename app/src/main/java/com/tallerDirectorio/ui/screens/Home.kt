@@ -35,10 +35,47 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil3.compose.AsyncImage
+import com.tallerDirectorio.Network.KtorClient
+
+//import com.juligraph.listapp.Routes
+import com.tallerDirectorio.model.User
+//import com.juligraph.listapp.network.KtorClient
+//import com.juligraph.listapp.ui.components.Loader
+import com.tallerDirectorio.ui.theme.MyApplicationTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier,
-               navController: NavController){
+               navController: NavController,
+               apiClient: KtorClient = KtorClient()
+            ){
+    val context = LocalContext.current
+    var users by remember { mutableStateOf(listOf<User>()) }
+    LazyColumn(
 
+    ) {
+        stickyHeader {
+            Text("hola")
+        }
+        if(users.isEmpty()){
+
+        }else{
+            items(users) { usr ->
+                ListItem(
+                    headlineContent = {
+                        Text("${usr.firstName} - (${usr.gender})")
+                    }
+                )
+            }
+        }
+    }
+
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    MyApplicationTheme {
+        HomeScreen(navController = rememberNavController())
+    }
 }

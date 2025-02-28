@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.juligraph.listapp"
+    namespace = "com.TallerDirectorio"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.juligraph.listapp"
+        applicationId = "com.tallerDirectorio"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
