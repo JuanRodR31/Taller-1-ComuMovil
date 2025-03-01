@@ -31,10 +31,12 @@ fun NavigationStack(modifier: Modifier = Modifier) {
             Home(navController = navController)
         }
         /*
-        composable<Routes.UserDetails> {
-            val args = it.toRoute<Routes.UserDetails>()
-            UserDetails(User)
+        composable<Routes.userDetails> {
+            val args = it.toRoute<Routes.userDetails>()
+            UserDetails()
         }
-        */
+
+         */
+
     }
 }

@@ -6,13 +6,17 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -60,18 +64,33 @@ fun Home(modifier: Modifier = Modifier,
             Text("hola")
         }
         if(users.isEmpty()){
-            stickyHeader {
-                Text("vacio")
+            item {
+                Loader(modifier = Modifier.fillMaxSize())
             }
         }else{
             items(users) { usr ->
                 ListItem(
+
+                    leadingContent = {
+                        AsyncImage(
+                            model = usr.image,
+                            contentDescription = "Imagen de perfil",
+                            modifier = Modifier.size(40.dp)
+                        )
+                    },
                     headlineContent = {
-                        Text("${usr.firstName} - (${usr.gender})")
+                        Text("${usr.firstName} ${usr.lastName}")
                     },
                     supportingContent = {
                         Text("${usr.email} ")
                     },
+                    trailingContent = {
+                        androidx.compose.material3.Icon(Icons.Default.Menu, contentDescription = "-")
+                        Spacer(modifier = Modifier.height(16.dp))
+                    },
+                    modifier = Modifier.clickable {
+
+                    }
 
                 )
             }
