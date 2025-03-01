@@ -16,12 +16,13 @@ data class User(
     val birthDate: String,
     val address: Address
 )
+
 @Serializable
 data class Address(
     val address: String,
     val city: String,
     val state: String,
     val stateCode: String,
-    val postalCode: Int,
+    val postalCode: String,
     val country: String
 )

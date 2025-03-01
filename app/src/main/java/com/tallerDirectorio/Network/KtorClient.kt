@@ -29,4 +29,5 @@ class KtorClient {
     suspend fun getUsers(): UsersList {
         return client.get("https://dummyjson.com/users").body<UsersList>()
     }
+
 }
