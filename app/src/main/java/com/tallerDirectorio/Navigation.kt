@@ -1,42 +1,33 @@
-package com.tallerDirectorio
+package com.tallerDirectorio.ui.screens
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.tallerDirectorio.viewmodel.ContactViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
-import com.tallerDirectorio.model.User
-import com.tallerDirectorio.ui.screens.Home
-import com.tallerDirectorio.ui.screens.UserDetails
-import kotlinx.serialization.Serializable
-
-@Serializable
-sealed interface Routes{
-
-    @Serializable
-    object Home
-
-    @Serializable
-    data class userDetails(val user: User)
-
-}
 
 @Composable
-fun NavigationStack(modifier: Modifier = Modifier) {
+fun AppNavigation() {
     val navController = rememberNavController()
+    val contactViewModel: ContactViewModel = viewModel() // ViewModel compartido
 
-    NavHost(navController = navController, startDestination = Routes.Home, modifier = modifier) {
-        composable<Routes.Home> {
-            Home(navController = navController)
+    NavHost(navController = navController, startDestination = "home") {
+        composable("home") {
+            Home(navController = navController, contactViewModel = contactViewModel)
         }
-        /*
-        composable<Routes.userDetails> {
-            val args = it.toRoute<Routes.userDetails>()
-            UserDetails()
+        composable("user_detail/{userId}") { backStackEntry ->
+            val userId = backStackEntry.arguments?.getString("userId")
+            UserDetailScreenFromNavigation(userId = userId, navController = navController, contactViewModel = contactViewModel)
         }
-
-         */
-
     }
 }
