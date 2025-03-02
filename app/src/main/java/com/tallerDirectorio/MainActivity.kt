@@ -14,7 +14,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.tallerDirectorio.ui.theme.MyApplicationTheme
+import com.example.compose.AppTheme
+
 import com.tallerDirectorio.ui.screens.Home
 import com.tallerDirectorio.ui.screens.UserDetailScreenFromNavigation
 import com.tallerDirectorio.viewmodel.ContactViewModel
@@ -24,7 +25,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MyApplicationTheme {
+            AppTheme  {
                 val navController = rememberNavController()
                 val contactViewModel: ContactViewModel = viewModel ()
 

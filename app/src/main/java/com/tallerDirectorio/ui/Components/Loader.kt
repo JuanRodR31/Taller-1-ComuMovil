@@ -11,7 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.tallerDirectorio.ui.theme.MyApplicationTheme
+import com.example.compose.AppTheme
+
 
 @Composable
 fun Loader(modifier: Modifier = Modifier){
@@ -34,7 +35,7 @@ fun Loader(modifier: Modifier = Modifier){
 @Preview(showBackground = true, widthDp = 400, heightDp = 200)
 @Composable
 fun LoaderPreview() {
-    MyApplicationTheme {
+    AppTheme {
         Loader()
     }
 }

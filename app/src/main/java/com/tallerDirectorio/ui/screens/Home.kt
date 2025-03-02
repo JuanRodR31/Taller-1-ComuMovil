@@ -42,7 +42,7 @@ import com.tallerDirectorio.Network.KtorClient
 import com.tallerDirectorio.model.User
 import com.tallerDirectorio.viewmodel.ContactViewModel
 import com.tallerDirectorio.ui.Components.Loader
-import com.tallerDirectorio.ui.theme.MyApplicationTheme
+import com.example.compose.AppTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -100,7 +100,8 @@ fun Home(
                         )
                     },
                     supportingContent = {
-                        Text("${usr.email}")
+                        Text("${usr.email}",maxLines = 1,
+                            overflow = TextOverflow.Ellipsis)
                     },
                     trailingContent = {
                         Icon(Icons.Default.Menu, contentDescription = "Menu icon")
@@ -120,7 +121,7 @@ fun Home(
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    MyApplicationTheme {
+    AppTheme {
         Home(navController = rememberNavController())
     }
 }
