@@ -48,6 +48,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
+import androidx.compose.material3.MaterialTheme
+
 
 
 import androidx.compose.animation.core.*
@@ -65,7 +67,7 @@ fun UserDetailScreenFromNavigation(userId: String?, navController: NavController
 
     val uiState by contactViewModel.uiState.collectAsState()
     val context = LocalContext.current
-
+    val primaryColor = MaterialTheme.colorScheme.primary
     val userIdInt = userId?.toIntOrNull()
     val user = uiState.usersList.find { it.id == userIdInt }
 
@@ -83,7 +85,7 @@ fun UserDetailScreenFromNavigation(userId: String?, navController: NavController
 
         // Definimos un gradiente animado con colores intercalados
         val gradientBrush = Brush.linearGradient(
-            colors = listOf(Color.Blue, Color.Magenta, Color.Cyan, Color.Blue, Color.Magenta),
+            colors = listOf(Color.Blue, Color.Magenta, Color.Cyan, Color.Blue, Color.Magenta,Color.Blue),
             start = Offset(x = offset, y = 0f),
             end = Offset(x = offset + 200f, y = 200f)
         )
@@ -129,19 +131,19 @@ fun UserDetailScreenFromNavigation(userId: String?, navController: NavController
                             .size(110.dp)
                             .clip(CircleShape)
                             .align(Alignment.Center)
-                            .background(color = Color.Blue)
+                            .background(MaterialTheme.colorScheme.background)
 
                     )
                 }
             }
 
-            Spacer(modifier = Modifier.height(60.dp))
+            Spacer(modifier = Modifier.height(66.dp))
 
 
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color.White)
+                    .background(MaterialTheme.colorScheme.background)
                     .padding(top = 40.dp)
 
             ) {
@@ -196,20 +198,23 @@ fun UserDetailScreenFromNavigation(userId: String?, navController: NavController
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                Column (modifier = Modifier
-                    .padding(20.dp)
-                ) {
-                    Text("Dirección: ${user.address.address}")
-                    Text("Ciudad: ${user.address.city}")
-                    Text("Estado: ${user.address.state}")
-                    Text("Código postal: ${user.address.postalCode}")
-                    Text("Pais: ${user.address.country}")
-                    Text("Código de estado: ${user.address.stateCode}")
 
-                }
-
-                Spacer(modifier = Modifier.height(8.dp))
             }
+            Column (modifier = Modifier
+                .padding(20.dp)
+                .background(MaterialTheme.colorScheme.background)
+
+            ) {
+                Text("Dirección: ${user.address.address}")
+                Text("Ciudad: ${user.address.city}")
+                Text("Estado: ${user.address.state}")
+                Text("Código postal: ${user.address.postalCode}")
+                Text("Pais: ${user.address.country}")
+                Text("Código de estado: ${user.address.stateCode}")
+
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
         }
     } else {
         Text("Usuario no encontrado ${userId} ")
