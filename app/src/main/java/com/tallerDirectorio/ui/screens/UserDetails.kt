@@ -58,8 +58,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
-
-
+import com.tallerDirectorio.ui.Components.Loader
 
 
 @Composable
@@ -71,19 +70,30 @@ fun UserDetailScreenFromNavigation(userId: String?, navController: NavController
     val userIdInt = userId?.toIntOrNull()
     val user = uiState.usersList.find { it.id == userIdInt }
 
-    if (user != null) {
+    if(user == null){
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Loader(
+                modifier = Modifier.size(80.dp)
+            )
+        }
+    }
+    else{
 
         val transition = rememberInfiniteTransition()
         val offset by transition.animateFloat(
             initialValue = 0f,
-            targetValue = 300f, // Se moverá dentro de este rango
+            targetValue = 300f,
             animationSpec = infiniteRepeatable(
                 animation = tween(durationMillis = 4000, easing = LinearEasing),
                 repeatMode = RepeatMode.Reverse
             )
         )
 
-        // Definimos un gradiente animado con colores intercalados
         val gradientBrush = Brush.linearGradient(
             colors = listOf(Color.Blue, Color.Magenta, Color.Cyan, Color.Blue, Color.Magenta,Color.Blue),
             start = Offset(x = offset, y = 0f),
@@ -108,7 +118,7 @@ fun UserDetailScreenFromNavigation(userId: String?, navController: NavController
         )
 
 
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column{
             Column(modifier = Modifier
                 .fillMaxWidth()
                 .background(animatedGradient)
@@ -137,27 +147,28 @@ fun UserDetailScreenFromNavigation(userId: String?, navController: NavController
                 }
             }
 
-            Spacer(modifier = Modifier.height(66.dp))
-
+            Spacer(modifier = Modifier.height(68.dp))
+            Text(
+                text = "${user.firstName} ${user.lastName}" +
+                        (if (!user.maidenName.isNullOrBlank()) " (${user.maidenName})" else ""),
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                letterSpacing = 1.5.sp,
+                modifier = Modifier.padding(8.dp)
+                    .align(Alignment.CenterHorizontally),
+                style = androidx.compose.ui.text.TextStyle(
+                    brush = gradientBrush
+                )
+            )
 
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(MaterialTheme.colorScheme.background)
-                    .padding(top = 40.dp)
+                    .padding(top = 20.dp)
 
             ) {
-                Text(
-                    text = "${user.firstName} ${user.lastName}" +
-                            (if (!user.maidenName.isNullOrBlank()) " (${user.maidenName})" else ""),
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    letterSpacing = 1.5.sp,
-                    modifier = Modifier.padding(8.dp),
-                    style = androidx.compose.ui.text.TextStyle(
-                        brush = gradientBrush
-                    )
-                )
+
 
                 Spacer(modifier = Modifier.height(10.dp))
                 Row (modifier = Modifier
@@ -196,8 +207,13 @@ fun UserDetailScreenFromNavigation(userId: String?, navController: NavController
                 }
 
 
-                Spacer(modifier = Modifier.height(16.dp))
-
+                Spacer(modifier = Modifier.height(8.dp))
+                HorizontalDivider(modifier = Modifier
+                    .padding(vertical = 4.dp)
+                    .padding(horizontal = 15.dp)
+                    .background(color = Color.Gray)
+                )
+                Spacer(modifier = Modifier.height(8.dp))
 
             }
             Column (modifier = Modifier
@@ -216,8 +232,6 @@ fun UserDetailScreenFromNavigation(userId: String?, navController: NavController
 
             Spacer(modifier = Modifier.height(8.dp))
         }
-    } else {
-        Text("Usuario no encontrado ${userId} ")
     }
 }
 
