@@ -14,9 +14,13 @@ data class User(
     val gender: String,
     val image: String,
     val birthDate: String,
-    val address: Address
+    val address: Address,
+    val company: Company
 )
-
+@Serializable
+data class Company(
+    val name: String
+)
 @Serializable
 data class Address(
     val address: String,

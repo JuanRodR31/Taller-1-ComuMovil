@@ -204,6 +204,7 @@ fun UserDetailScreenFromNavigation(userId: String?, navController: NavController
                     Text("Edad: ${user.age}")
                     Text("Género: ${user.gender}")
                     Text("Fecha de nacimiento: ${user.birthDate}")
+                    Text("Company: ${user.company.name}")
                 }
 
 

@@ -122,7 +122,7 @@ fun Home(
                         )
                     },
                     supportingContent = {
-                        Text("${usr.email}",maxLines = 1,
+                        Text("${usr.company.name}",maxLines = 1,
                             overflow = TextOverflow.Ellipsis)
                     },
                     trailingContent = {
